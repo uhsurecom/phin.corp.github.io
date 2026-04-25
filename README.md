@@ -1,2 +1,0 @@
-# Phin.Corp
-PhinCorp webtest

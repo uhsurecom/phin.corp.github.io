@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Code Redemption | Keep Your Friends Happy 😂</title>
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js (Optional - for simple interactions) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div x-data="redeemApp()" class="app-container">
+        
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1 class="gradient-text">Joke Code Redemption Center</h1>
+            <p class="subtitle">Enter your code to unlock the power of friendship</p>
+            
+            <!-- Input Form -->
+            <form @submit.prevent="handleRedeem" class="redeem-form">
+                <div class="input-group">
+                    <label for="code-input" class="visually-hidden">Code</label>
+                    <input 
+                        type="text" 
+                        id="code-input" 
+                        x-model="userInput" 
+                        placeholder="e.g., 20, 24" 
+                        maxlength="10"
+                        :class="{ 'error': error }"
+                        required
+                    >
+                    <span class="error-message" x-show="error" x-text="error"></span>
+                </div>
+                
+                <button type="submit" class="redeem-btn">
+                    <span x-text="loading ? 'Redeeming...' : 'Redeem Code'"></span>
+                </button>
+            </form>
+
+            <!-- Error Alert -->
+            <div class="alert alert-error" x-show="error" role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <span x-text="error"></span>
+            </div>
+
+            <!-- Success Modal (Popup) -->
+            <div class="modal-overlay" x-show="showModal">
+                <div class="modal-content" x-transition:enter="transition ease-out duration-300" 
+                                 x-transition:enter-start="opacity-0 scale-95"
+                                 x-transition:enter-end="opacity-100 scale-100">
+                    <h2 class="modal-title" x-text="currentReward.title"></h2>
+                    <p class="modal-message" x-text="currentReward.message"></p>
+                    <div class="reward-image" x-show="currentReward.image">
+                        <!-- Image placeholder -->
+                    </div>
+                    <button @click="closeModal()" class="modal-close-btn">Awesome! 😎</button>
+                </div>
+            </div>
+
+            <!-- Featured Codes (Optional - Showcase popular codes) -->
+            <section class="featured-codes" x-show="featuredCodes.length > 0">
+                <h3>🔥 Popular Codes 🔥</h3>
+                <div class="code-grid">
+                    <template x-for="(code, index) in featuredCodes" :key="index">
+                        <div class="code-card">
+                            <span class="code-label" x-text="'#'+ code.code"></span>
+                            <p class="code-description" x-text="code.description"></p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+        </header>
+
+    </div>
+
+    <!-- Alpine.js App Logic -->
+    <script src="codes.json" type="application/json" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
