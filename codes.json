@@ -1,0 +1,32 @@
+{
+  "validCodes": [
+    {
+      "code": "10",
+      "title": "10% Takesies Backsies",
+      "message": "You're officially in the 'takesie, backsie' club! 🎭\n\nRedemption Reward: One (1) free pizza of your choice from any chain. Remember to bring your appetite!",
+      "image": null
+    },
+    {
+      "code": "24",
+      "title": "24 hour No Touchy",
+      "message": "Touch me, and I'll be gone! 💨\n\nRedemption Reward: A mysterious box of snacks. What's inside? The suspense is the reward!",
+      "image": null
+    },
+    {
+      "code": "1337",
+      "title": "Leet Speak Legend",
+      "message": "Hello, 1337! 🕶️\n\nRedemption Reward: Title of 'Lord of the Code' for one week. Wear it proudly (or hide your face).",
+      "image": null
+    },
+    {
+      "code": "FRIENDS4EVER",
+      "title": "Best Friends Forever",
+      "message": "The truest code of all! ❤️\n\nRedemption Reward: Unlimited 'who wants to hang out' privileges for the next 30 days.",
+      "image": null
+    }
+  ],
+  "featuredCodes": [
+    { "code": "24", "description": "No touchy!" },
+    { "code": "1337", "description": "Leet Speak Legend" }
+  ]
+}
