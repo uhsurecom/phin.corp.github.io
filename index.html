@@ -17,6 +17,21 @@
 </head>
 <body class="bg-base">
 
+    <!-- Splash Screen (Curtain Effect) -->
+    <div id="splash-screen" class="splash-container">
+        <div class="curtain-top"></div>
+        <div class="curtain-bottom"></div>
+        
+        <!-- Loading Content -->
+        <div class="splash-content">
+            <h1 class="splash-title">PHINCORP</h1>
+            <p class="splash-subtitle">// LOADING PORTAL...</p>
+            
+            <!-- Animated Spinner -->
+            <div class="spinner-large"></div>
+        </div>
+    </div>
+
     <!-- Marquee Header (Animated Text) -->
     <div class="marquee-container">
         <p class="marquee-text">🚀 PHINCORP COUPON REDEEM PORTAL // ENTER YOUR CODE TO UNLOCK BENEFITS // 20% TAKESIES BACKSIES • 24 NO TOUCHY • FRIENDS4EVER //</p>
@@ -26,7 +41,7 @@
     <main class="app-container">
         
         <!-- Header Section (Bold & Raw) -->
-        <header class="portal-header" data-index="1">
+        <header class="portal-header" id="portal-header">
             <div class="logo-box">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
                 <div class="logo-text">
@@ -36,22 +51,22 @@
             </div>
             
             <!-- User Badge -->
-            <div class="user-badge" data-index="3">
+            <div class="user-badge" id="user-badge">
                 <span class="badge-text">EMPLOYEE ACCESS</span>
             </div>
         </header>
 
         <!-- Main Content Area (NeoBrutalist Grid) -->
-        <section class="portal-content grid-layout" data-index="4">
+        <section class="portal-content grid-layout" id="main-content">
             
             <!-- Welcome Section -->
-            <div class="welcome-box" data-index="5">
+            <div class="welcome-box">
                 <h2 class="welcome-title">WELCOME, EMPLOYEE 👋</h2>
                 <p class="welcome-subtext">// Ready to redeem your benefits? Type the code below.</p>
             </div>
 
             <!-- Input Form (NeoBrutalist Style) -->
-            <form @submit.prevent="handleRedeem" class="redeem-form" data-index="6">
+            <form @submit.prevent="handleRedeem" class="redeem-form">
                 
                 <!-- Code Input Field -->
                 <div class="input-group">
@@ -123,7 +138,7 @@
             </form>
 
             <!-- Quick Info Section (Grid Layout) -->
-            <section class="info-section grid-layout" data-index="8">
+            <section class="info-section grid-layout">
                 <h3 class="section-title">AVAILABLE BENEFITS</h3>
                 
                 <!-- Code Cards (NeoBrutalist Design) -->
