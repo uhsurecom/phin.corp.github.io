@@ -1,5 +1,5 @@
-function redeemApp() {
-    return {
+document.addEventListener('alpine:init', () => {
+    Alpine.data('redeemApp', () => ({
         userInput: '',
         error: null,
         loading: false,
@@ -65,5 +65,5 @@ function redeemApp() {
                 this.error = null;
             }, 300);
         }
-    };
-}
+    }));
+});
