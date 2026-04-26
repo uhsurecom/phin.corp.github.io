@@ -2,8 +2,6 @@
 :root {
     /* NeoBrutalist Color Palette - High Contrast, Acid Colors */
     --bg-primary: #fefefe;        /* Off-white base */
-    --bg-secondary: #e8f4fc;      /* Light blue tint */
-    
     --text-primary: #000000;     /* Pure black text */
     --text-secondary: #3d5a80;    /* Dark slate-blue */
     
@@ -27,12 +25,10 @@
     --shadow-hard: 6px 6px 0px #000000;       /* Hard shadow (no blur) */
     --shadow-hover: 4px 4px 0px #000000;     /* Smaller on hover */
     
-    /* Spacing & Layout */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.75rem;
-    --spacing-md: 1.25rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
+    /* Animation Timing (Simplified - No more --i variables!) */
+    --anim-fast: 0.3s ease-out;
+    --anim-med: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --anim-slow: 1s ease-out;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,6 +51,15 @@ h3 { font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
 p { font-family: 'Space Mono', monospace; font-size: 1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: var(--spacing-sm); }
 small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.2em; }
+
+/* ===== Spacing Variables (Consistent) ===== */
+:root {
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1.25rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+}
 
 /* ===== Marquee Header (Animated Text) ===== */
 .marquee-container {
@@ -121,17 +126,16 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
     margin-bottom: var(--spacing-xl);
 }
 
-.logo-box { display: flex; align-items: center; gap: var(--spacing-sm); animation: fadeInDownHeader 0.6s ease-out forwards; opacity: 0; }
-@keyframes fadeInDownHeader { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.logo-box { display: flex; align-items: center; gap: var(--spacing-sm); }
 
 .logo-box svg { width: 56px; height: 56px; animation: bounceLogo 2s infinite cubic-bezier(0.34, 1.56, 0.64, 1); }
 @keyframes bounceLogo { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.05); } }
 
-.logo-text h1 { font-family: 'Space Mono', monospace; animation: fadeInDownHeaderText 0.6s ease-out forwards 0.2s backwards; opacity: 0; text-shadow: var(--shadow-hard); }
-@keyframes fadeInDownHeaderText { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.logo-text h1 { font-family: 'Space Mono', monospace; animation: fadeInDownHeader var(--anim-med); opacity: 0; text-shadow: var(--shadow-hard); }
+@keyframes fadeInDownHeader { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-.logo-text p { font-size: 0.875rem; animation: fadeInDownHeaderText 0.6s ease-out forwards 0.4s backwards; opacity: 0; text-shadow: var(--shadow-hard); }
-@keyframes fadeInDownHeaderText { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.logo-text p { font-size: 0.875rem; animation: fadeInDownHeader var(--anim-med) backwards 0.2s; opacity: 0; text-shadow: var(--shadow-hard); }
+@keyframes fadeInDownHeader { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
 .user-badge { 
     padding: var(--spacing-sm) var(--spacing-md); 
@@ -140,7 +144,7 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    animation: slideInRightHeader 0.6s ease-out forwards 0.3s backwards; opacity: 0; 
+    animation: slideInRightHeader var(--anim-med) backwards 0.3s; opacity: 0; 
 }
 @keyframes slideInRightHeader { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
@@ -149,29 +153,27 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
     background: var(--box-bg-3); /* Mint Green Box */
     padding: var(--spacing-lg);
     border-radius: 0px;
-    animation: fadeInWelcomeBanner 1s ease-out forwards 0.2s backwards; opacity: 0; 
 }
-@keyframes fadeInWelcomeBanner { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.welcome-title { font-size: 1.75rem; margin-bottom: var(--spacing-sm); text-shadow: var(--shadow-hard); animation: fadeInWelcomeText 1s ease-out forwards 0.4s backwards; opacity: 0; }
+.welcome-title { font-size: 1.75rem; margin-bottom: var(--spacing-sm); text-shadow: var(--shadow-hard); animation: fadeInWelcomeText var(--anim-med) backwards 0.2s; opacity: 0; }
 @keyframes fadeInWelcomeText { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.welcome-subtext { font-family: 'Space Mono', monospace; animation: fadeInWelcomeSubtext 1s ease-out forwards 0.6s backwards; opacity: 0; text-shadow: var(--shadow-hard); }
+.welcome-subtext { font-family: 'Space Mono', monospace; animation: fadeInWelcomeSubtext var(--anim-med) backwards 0.4s; opacity: 0; text-shadow: var(--shadow-hard); }
 @keyframes fadeInWelcomeSubtext { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ===== Form Styling (NeoBrutalist - Thick Borders) ===== */
 .redeem-form { 
     background: var(--box-bg-1); /* Light Orange Box */
     padding: var(--spacing-xl); 
-    max-width: 520px; margin: 0 auto 3rem; border-radius: 0px; animation: fadeInForm 1s ease-out forwards 0.3s backwards; opacity: 0; transform: translateY(30px); }
-@keyframes fadeInForm { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    max-width: 520px; margin: 0 auto 3rem; border-radius: 0px; 
+}
 
 .input-group label.input-label { 
-    display: block; font-size: 0.875rem; color: var(--text-primary); margin-bottom: var(--spacing-sm); text-transform: uppercase; letter-spacing: 1px; animation: fadeInInputLabel 1s ease-out forwards 0.4s backwards; opacity: 0; transform: translateY(20px); 
+    display: block; font-size: 0.875rem; color: var(--text-primary); margin-bottom: var(--spacing-sm); text-transform: uppercase; letter-spacing: 1px; animation: fadeInInputLabel var(--anim-med) backwards 0.4s; opacity: 0; transform: translateY(20px); 
 }
 @keyframes fadeInInputLabel { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.icon-container { display: flex; align-items: center; background: var(--accent-3); border-radius: 0px; padding: var(--spacing-md) var(--spacing-lg); transition: all 0.2s ease; animation: fadeInInputContainer 1s ease-out forwards 0.5s backwards; opacity: 0; transform: translateY(20px); }
+.icon-container { display: flex; align-items: center; background: var(--accent-3); border-radius: 0px; padding: var(--spacing-md) var(--spacing-lg); transition: all 0.2s ease; animation: fadeInInputContainer var(--anim-med) backwards 0.5s; opacity: 0; transform: translateY(20px); }
 @keyframes fadeInInputContainer { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 .icon-container:focus-within { 
@@ -179,11 +181,11 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
     box-shadow: var(--shadow-hard), inset 0 0 0 3px #fff, inset 2px 2px 0px rgba(0, 0, 0, 0.1); 
 }
 
-.input-icon { width: 36px; height: 40px; margin-right: var(--spacing-sm); flex-shrink: 0; animation: fadeInInputIcon 1s ease-out forwards 0.6s backwards; opacity: 0; transform: translateY(20px); }
+.input-icon { width: 36px; height: 40px; margin-right: var(--spacing-sm); flex-shrink: 0; animation: fadeInInputIcon var(--anim-med) backwards 0.6s; opacity: 0; transform: translateY(20px); }
 @keyframes fadeInInputIcon { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 #code-input { 
-    flex: 1; padding: var(--spacing-md) 0.5rem; font-size: 1.125rem; background: #fff; border: none; color: var(--text-primary); outline: none; animation: fadeInInputField 1s ease-out forwards 0.7s backwards; opacity: 0; transform: translateY(20px); 
+    flex: 1; padding: var(--spacing-md) 0.5rem; font-size: 1.125rem; background: #fff; border: none; color: var(--text-primary); outline: none; animation: fadeInInputField var(--anim-med) backwards 0.7s; opacity: 0; transform: translateY(20px); 
 }
 @keyframes fadeInInputField { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -192,14 +194,13 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
 #code-input.error { animation: shakeForm 0.4s ease-in-out; border-color: var(--error); background: #fff; box-shadow: var(--shadow-hard), inset 0 0 0 3px var(--error); }
 @keyframes shakeForm { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-12px); } 75% { transform: translateX(12px); } }
 
-.error-message { display: block; color: var(--error); font-size: 0.9rem; margin-top: -0.25rem; animation: slideInErrorForm 0.3s ease-out forwards; opacity: 0; transform: translateY(-10px); text-transform: uppercase; letter-spacing: 0.5px; }
+.error-message { display: block; color: var(--error); font-size: 0.9rem; margin-top: -0.25rem; animation: slideInErrorForm var(--anim-fast) forwards; opacity: 0; transform: translateY(-10px); text-transform: uppercase; letter-spacing: 0.5px; }
 @keyframes slideInErrorForm { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ===== NeoBrutalist Button (Thick, Bold) ===== */
 .redeem-btn { 
-    display: flex; align-items: center; justify-content: center; gap: var(--spacing-sm); padding: var(--spacing-lg) 2.5rem; font-size: 1.125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: linear-gradient(90deg, var(--accent-3), var(--accent-4)); color: #fff; border: var(--border-thick); border-radius: 0px; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; animation: fadeInButton 1s ease-out forwards 0.8s backwards; opacity: 0; transform: translateY(30px); 
+    display: flex; align-items: center; justify-content: center; gap: var(--spacing-sm); padding: var(--spacing-lg) 2.5rem; font-size: 1.125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: linear-gradient(90deg, var(--accent-3), var(--accent-4)); color: #fff; border: var(--border-thick); border-radius: 0px; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; 
 }
-@keyframes fadeInButton { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
 .redeem-btn:hover { background: linear-gradient(90deg, var(--accent-2), var(--accent-4)); transform: translate(-3px, -3px) scale(1.02); box-shadow: var(--shadow-hard), 8px 8px 0px #000000; }
 .pulse-animation { animation: pulseBtnNeo 3s infinite cubic-bezier(0.34, 1.56, 0.64, 1); }
@@ -217,46 +218,44 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
 
 /* ===== Modal/Popup (Bold & Raw) ===== */
 .modal-overlay { 
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s ease; animation: fadeInModalOverlay 0.3s ease forwards; 
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s ease; 
 }
-@keyframes fadeInModalOverlay { from { opacity: 0; } to { opacity: 1; } }
-
 .modal-overlay.show { opacity: 1; pointer-events: auto; }
 
-.modal-entrance { transform: scale(0.95); animation: modalEntranceNeo 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.modal-entrance { transform: scale(0.95); animation: modalEntranceNeo var(--anim-med) forwards; }
 @keyframes modalEntranceNeo { to { opacity: 1; transform: scale(1); } }
 
 .modal-content { 
-    padding: var(--spacing-xl); max-width: 480px; width: 90%; text-align: center; background: linear-gradient(135deg, #fff, var(--box-bg-2)); border: var(--border-thick); box-shadow: var(--shadow-hard), inset 0 -2px 0 rgba(0, 0, 0, 0.1); animation: slideUpFadeModal 0.6s ease-out forwards 0.2s backwards; opacity: 0; transform: translateY(30px); 
+    padding: var(--spacing-xl); max-width: 480px; width: 90%; text-align: center; background: linear-gradient(135deg, #fff, var(--box-bg-2)); border: var(--border-thick); box-shadow: var(--shadow-hard), inset 0 -2px 0 rgba(0, 0, 0, 0.1); animation: slideUpFadeModal var(--anim-med) forwards 0.2s; opacity: 0; transform: translateY(30px); 
 }
 @keyframes slideUpFadeModal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
 .modal-header svg { width: 84px; height: 84px; margin-bottom: var(--spacing-lg); animation: bounceHeaderModal 2s infinite cubic-bezier(0.34, 1.56, 0.64, 1); filter: drop-shadow(var(--shadow-hard)); }
 @keyframes bounceHeaderModal { 0%, 100% { transform: translateY(0) scale(1); } 25% { transform: translateY(-12px) scale(1.08); } 75% { transform: translateY(4px) scale(0.98); } }
 
-.modal-title { font-family: 'Space Mono', monospace; font-size: 2rem; margin-bottom: var(--spacing-md); color: var(--accent-3); animation: slideDownFadeModal 0.6s ease-out 0.2s forwards; opacity: 0; transform: translateY(-40px); text-shadow: var(--shadow-hard); }
+.modal-title { font-family: 'Space Mono', monospace; font-size: 2rem; margin-bottom: var(--spacing-md); color: var(--accent-3); animation: slideDownFadeModal var(--anim-med) forwards 0.2s; opacity: 0; transform: translateY(-40px); text-shadow: var(--shadow-hard); }
 @keyframes slideDownFadeModal { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
 
-.modal-message { font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: var(--spacing-lg); animation: fadeInUpModal 0.8s ease-out 0.4s forwards; opacity: 0; transform: translateY(30px); text-shadow: var(--shadow-hard); }
+.modal-message { font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: var(--spacing-lg); animation: fadeInUpModal var(--anim-med) forwards 0.4s; opacity: 0; transform: translateY(30px); text-shadow: var(--shadow-hard); }
 @keyframes fadeInUpModal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
 .modal-close-btn { 
-    padding: var(--spacing-lg) 2.5rem; font-size: 1.125rem; border-radius: 0px; cursor: pointer; transition: all 0.3s ease; animation: fadeInUpModalClose 0.8s ease-out 0.6s forwards; opacity: 0; transform: translateY(30px); background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); text-transform: uppercase; letter-spacing: 1px; 
+    padding: var(--spacing-lg) 2.5rem; font-size: 1.125rem; border-radius: 0px; cursor: pointer; transition: all 0.3s ease; animation: fadeInUpModalClose var(--anim-med) forwards 0.6s; opacity: 0; transform: translateY(30px); background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); text-transform: uppercase; letter-spacing: 1px; 
 }
 @keyframes fadeInUpModalClose { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ===== Info Section (Clean & Minimal) ===== */
-.info-section { margin-top: var(--spacing-xl); text-align: left; animation: fadeInInfoSection 1s ease-out forwards 0.5s backwards; opacity: 0; transform: translateY(30px); }
+.info-section { margin-top: var(--spacing-xl); text-align: left; animation: fadeInInfoSection var(--anim-med) forwards 0.5s; opacity: 0; transform: translateY(30px); }
 @keyframes fadeInInfoSection { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.section-title { font-size: 1.5rem; margin-bottom: var(--spacing-md); color: var(--text-primary); animation: fadeInSectionTitle 1s ease-out forwards 0.6s backwards; opacity: 0; transform: translateY(30px); text-shadow: var(--shadow-hard); }
+.section-title { font-size: 1.5rem; margin-bottom: var(--spacing-md); color: var(--text-primary); animation: fadeInSectionTitle var(--anim-med) forwards 0.6s; opacity: 0; transform: translateY(30px); text-shadow: var(--shadow-hard); }
 @keyframes fadeInSectionTitle { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.code-grid { display: grid; gap: var(--spacing-md); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); animation: fadeInUpGridInfo 1s ease-out forwards 0.7s backwards; opacity: 0; transform: translateY(30px); }
+.code-grid { display: grid; gap: var(--spacing-md); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); animation: fadeInUpGridInfo var(--anim-med) forwards 0.7s; opacity: 0; transform: translateY(30px); }
 @keyframes fadeInUpGridInfo { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
 .code-card { 
-    padding: var(--spacing-lg); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); animation: cardEntranceInfo 0.8s ease-out forwards; opacity: 0; transform: translateY(30px) scale(0.95); 
+    padding: var(--spacing-lg); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); animation: cardEntranceInfo var(--anim-med) forwards; opacity: 0; transform: translateY(30px) scale(0.95); 
 }
 @keyframes cardEntranceInfo { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
@@ -265,17 +264,17 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
 .badge-badge { display: inline-block; padding: 0.5rem 1rem; background: linear-gradient(90deg, var(--accent-4), var(--accent-3)); border-radius: 0px; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--spacing-sm); animation: glowBadgeInfo 2s infinite alternate cubic-bezier(0.34, 1.56, 0.64, 1); }
 @keyframes glowBadgeInfo { from, to { box-shadow: var(--shadow-hard), inset 0 -1px 0 rgba(0, 0, 0, 0.2); } 50% { box-shadow: var(--shadow-hover), inset 0 -3px 0 rgba(0, 0, 0, 0.4); } }
 
-.card-title { font-size: 1.25rem; margin-bottom: var(--spacing-sm); color: var(--text-primary); animation: slideInLeftInfo 0.8s ease-out 0.2s backwards; opacity: 0; transform: translateX(-30px); text-shadow: var(--shadow-hard); }
+.card-title { font-size: 1.25rem; margin-bottom: var(--spacing-sm); color: var(--text-primary); animation: slideInLeftInfo var(--anim-med) forwards 0.2s; opacity: 0; transform: translateX(-30px); text-shadow: var(--shadow-hard); }
 @keyframes slideInLeftInfo { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
 
-.card-description { font-size: 1rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); animation: slideUpFadeDescInfo 0.8s ease-out 0.3s backwards; opacity: 0; transform: translateY(20px); text-shadow: var(--shadow-hard); }
+.card-description { font-size: 1rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); animation: slideUpFadeDescInfo var(--anim-med) forwards 0.3s; opacity: 0; transform: translateY(20px); text-shadow: var(--shadow-hard); }
 @keyframes slideUpFadeDescInfo { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ===== Alert Animation (Slide-in from bottom) ===== */
-.alert-wrapper { animation: fadeInAlertWrapperForm 0.4s ease-out forwards; opacity: 0; pointer-events: none; }
+.alert-wrapper { animation: fadeInAlertWrapperForm var(--anim-fast) forwards; opacity: 0; pointer-events: none; }
 @keyframes fadeInAlertWrapperForm { to { opacity: 1; pointer-events: auto; } }
 
-.slide-in-bottom { animation: slideInBottomErrorForm 0.3s ease-out forwards; transform-origin: center bottom; }
+.slide-in-bottom { animation: slideInBottomErrorForm var(--anim-fast) forwards; transform-origin: center bottom; }
 @keyframes slideInBottomErrorForm { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
 
 .alert-error.animate { animation: pulseAlertInfo 0.6s ease-out forwards, shakeBorderInfo 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
@@ -294,7 +293,8 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
 
 /* ===== Responsive Tweaks (Mobile-First) ===== */
 @media (max-width: 768px) {
-    .portal-header { flex-direction: column; gap: var(--spacing-sm); align-items: stretch; text-align: center; padding: var(--spacing-md) var(--spacing-sm); animation: fadeInDownHeaderMobile 0.6s ease-out forwards; opacity: 0; }
+    .portal-header { flex-direction: column; gap: var(--spacing-sm); align-items: stretch; text-align: center; padding: var(--spacing-md) var(--spacing-sm); animation: fadeInDownHeaderMobile var(--anim-med) forwards; opacity: 0; }
+    
     @keyframes fadeInDownHeaderMobile { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     
     .app-container { padding: var(--spacing-lg) var(--spacing-sm); }
@@ -306,34 +306,17 @@ small, .subtext { font-size: 0.875rem; text-transform: uppercase; letter-spacing
     .marquee-container { font-size: 0.875rem; border-bottom-width: 2px; }
 }
 
-/* ===== Additional NeoBrutalist Effects ===== */
-
-/* Glitch Effect on Hover (Optional - Add for extra flair) */
-@keyframes glitchText { 
-    0%, 100% { transform: translateX(0); } 
-    25% { transform: translateX(-4px); } 
-    75% { transform: translateX(4px); } 
-}
-
-/* Jitter Animation (Subtle) */
-@keyframes jitter { 
-    0%, 100% { opacity: 1; } 
-    25% { opacity: 0.8; } 
-    75% { opacity: 0.9; } 
-}
-
-/* Scanline Effect (Optional - Retro Feel) */
-.scanlines::before {
-    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
-    pointer-events: none; z-index: 9999; animation: scanlineScroll 8s linear infinite; opacity: 0.5;
-}
-@keyframes scanlineScroll { from { background-position: 0 0; } to { background-position: 0 100%; } }
-
 /* ===== Fade-in Helper Classes (for JS-triggered animations) ===== */
-.fade-in-up { animation: fadeInUpHelperInfo 0.8s ease-out forwards; opacity: 0; transform: translateY(40px); }
+.fade-in-up { animation: fadeInUpHelperInfo var(--anim-med) forwards; opacity: 0; transform: translateY(40px); }
 @keyframes fadeInUpHelperInfo { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
 .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
 .fade-in-up:nth-child(3) { animation-delay: 0.4s; }
+
+/* ===== Glassmorphism (Subtle Corporate Style) ===== */
+.glass-card { background: var(--glass-bg); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%); border: 1px solid var(--glass-border); border-radius: 1rem; box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.1); }
+.glass-overlay { backdrop-filter: blur(24px) saturate(200%); }
+
+/* ===== Loading States (Corporate Style) ===== */
+@keyframes fadeInDownHeaderMobile { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
