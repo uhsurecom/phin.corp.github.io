@@ -3,140 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhinCorp | Coupon Redeem Portal</title>
+    <title>PhinCorp | Coupon Redeem</title>
     
-    <!-- Corporate Fonts -->
+    <!-- NeoBrutalist Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Alpine.js for interactions -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gradient-base">
+<body class="bg-base">
 
-    <!-- Minimal Background Pattern (Subtle) -->
-    <div class="portal-background"></div>
+    <!-- Marquee Header (Animated Text) -->
+    <div class="marquee-container">
+        <p class="marquee-text">
+            🚀 PHINCORP COUPON REDEEM PORTAL // 
+            ENTER YOUR CODE TO UNLOCK BENEFITS // 
+            20% TAKESIES BACKSIES • 24 NO TOUCHY • FRIENDS4EVER // 
+        </p>
+    </div>
 
-    <!-- Main App Container -->
+    <!-- Main Container -->
     <main class="app-container">
         
-        <!-- Top Navigation Bar (Corporate Header) -->
-        <header class="portal-header fade-in-down">
-            <div class="header-left">
-                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
-                <div class="header-title">
-                    <h1 style="--level:1; --weight:700">PhinCorp</h1>
-                    <p style="--level:2; --weight:400">Employee Benefits Portal</p>
+        <!-- Header Section (Bold & Raw) -->
+        <header class="portal-header glass-border" style="--i:1;">
+            <div class="logo-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
+                <div class="logo-text">
+                    <h1 style="--level:1; --weight:700;">PHINCORP</h1>
+                    <p style="--level:2; --weight:400;">COUPON PORTAL v1.0</p>
                 </div>
             </div>
             
-            <!-- Optional User Profile / Logout (Add if needed) -->
-            <div class="header-right" style="--i:3;">
-                <span class="user-badge">Portal v1.0</span>
+            <!-- User Badge -->
+            <div class="user-badge glass-border" style="--i:3;">
+                <span class="badge-text">EMPLOYEE ACCESS</span>
             </div>
         </header>
 
-        <!-- Main Content Area -->
-        <section class="portal-content fade-in-up">
+        <!-- Main Content Area (NeoBrutalist Grid) -->
+        <section class="portal-content grid-layout" style="--i:4;">
             
-            <!-- Welcome Banner (Optional - Clean & Minimal) -->
-            <div class="welcome-banner" style="--i:4;">
-                <p class="welcome-text">Welcome back, Employee</p>
-                <span class="welcome-subtext">Ready to redeem your benefits?</span>
+            <!-- Welcome Section -->
+            <div class="welcome-box glass-border" style="--i:5;">
+                <h2 class="welcome-title">WELCOME, EMPLOYEE 👋</h2>
+                <p class="welcome-subtext">// Ready to redeem your benefits? Type the code below.</p>
             </div>
 
-            <!-- Input Form Section (Glassmorphism) -->
-            <form @submit.prevent="handleRedeem" class="redeem-form glass-card" style="--i:5;">
+            <!-- Input Form (NeoBrutalist Style) -->
+            <form @submit.prevent="handleRedeem" class="redeem-form glass-border" style="--i:6;">
                 
-                <!-- Code Input Field with Label -->
+                <!-- Code Input Field -->
                 <div class="input-group">
-                    <label for="code-input" class="input-label">Enter Coupon/Code</label>
+                    <label for="code-input" class="input-label">STEP 1: ENTER CODE</label>
                     
                     <div class="icon-container">
-                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
                         <input 
                             type="text" 
                             id="code-input" 
                             x-model="userInput" 
-                            placeholder="e.g., 20, 24, FRIENDS4EVER"
-                            maxlength="15"
+                            placeholder="TYPE CODE HERE..."
+                            maxlength="20"
                             :class="{ 'error': error }"
                             required
                             autocomplete="off"
+                            style="--i:7;"
                         >
                     </div>
 
                     <span class="error-message" x-show="error" x-text="error"></span>
                 </div>
                 
-                <!-- Submit Button (Corporate Style) -->
+                <!-- Submit Button -->
                 <button type="submit" 
-                        class="redeem-btn glass-btn pulse-animation" 
+                        class="redeem-btn glass-border pulse-animation" 
                         :class="{ 'loading': loading }">
-                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
-                    <span x-text="loading ? 'Processing...' : 'Redeem Coupon'"></span>
-                    <!-- Loading Spinner (Hidden by default) -->
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
+                    <span x-text="loading ? 'PROCESSING...' : 'REDEEM NOW'"></span>
+                    <!-- Loading Spinner -->
                     <div class="spinner" x-show="loading">
                         <span></span><span></span><span></span><span></span>
                     </div>
                 </button>
 
-                <!-- Error Alert with Animation -->
+                <!-- Error Alert -->
                 <div class="alert-wrapper">
                     <div class="alert-error slide-in-bottom" 
                          x-show="error" 
                          role="alert"
                          :class="{ 'animate': error }">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                        <span x-text="error"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#fff" stroke="#ef4444" stroke-width="3"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                        <span class="error-text" x-text="error"></span>
                     </div>
                 </div>
 
-                <!-- Success Modal (Popup) with Corporate Style -->
-                <div class="modal-overlay glass-overlay" 
+                <!-- Success Modal (Popup) -->
+                <div class="modal-overlay glass-border" 
                      :class="{ 'show': showModal }">
-                    <div class="modal-content glass-card modal-entrance" 
+                    <div class="modal-content modal-entrance" 
                          x-show="showModal"
                          @click.away="closeModal()">
                         <!-- Modal Header Icon -->
                         <div class="modal-header pulse-animation">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="#6366f1" stroke="#fff" stroke-width="3"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
                         </div>
                         
-                        <h2 class="modal-title bounce-in">✅ Coupon Redeemed</h2>
+                        <h2 class="modal-title bounce-in">✅ CODE REDEEMED!</h2>
                         <p class="modal-message slide-up-fade" x-text="currentReward.message"></p>
                         
-                        <!-- Optional Image Display -->
-                        <div class="reward-image-container" 
-                             x-show="currentReward.image && currentReward.image !== 'null'">
-                            <img :src="currentReward.image" alt="Reward" class="reward-image-anim">
-                        </div>
-
                         <!-- Close Button -->
                         <button @click="closeModal()" 
-                                class="modal-close-btn glass-btn"
+                                class="modal-close-btn glass-border"
                                 type="button">
-                            Continue to Dashboard →
+                            NEXT: GO TO DASHBOARD →
                         </button>
                     </div>
                 </div>
 
             </form>
 
-            <!-- Quick Info Section (Clean & Minimal) -->
-            <section class="info-section fade-in-up" style="--i:6;">
-                <h3 class="section-title">Available Benefits</h3>
+            <!-- Quick Info Section (Grid Layout) -->
+            <section class="info-section grid-layout" style="--i:8;">
+                <h3 class="section-title">AVAILABLE BENEFITS</h3>
                 
-                <!-- Code Cards (Minimalist Design) -->
+                <!-- Code Cards (NeoBrutalist Design) -->
                 <div class="code-grid hover-tilt">
                     <template x-for="(code, index) in featuredCodes" :key="index">
-                        <article class="code-card glass-card tilt-effect">
+                        <article class="code-card glass-border tilt-effect">
                             <span class="badge-badge glow-animation" 
                                   :style="{ animationDelay: `${index * 0.1}s` }">
-                                {{ code.code }}
+                                CODE #{{ code.code }}
                             </span>
 
                             <h4 class="card-title slide-in-left" x-text="code.title"></h4>
@@ -156,4 +154,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
