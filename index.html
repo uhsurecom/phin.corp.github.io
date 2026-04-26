@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhinCorp Code Redeem Portaltitle>
+    <title>PhinCorp | Coupon Redeem Portal</title>
     
-    <!-- Modern Fonts -->
+    <!-- Corporate Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Alpine.js for interactions -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -17,57 +17,67 @@
 </head>
 <body class="bg-gradient-base">
 
-    <!-- Animated Particle Canvas Background -->
-    <canvas id="particle-canvas" class="particle-canvas"></canvas>
-
-    <!-- Animated Mesh Gradient Orbs (CSS-only animation) -->
-    <div class="gradient-orb orb-1" style="--color: #6366f1; --size: 500px;"></div>
-    <div class="gradient-orb orb-2" style="--color: #a855f7; --size: 400px;"></div>
-    <div class="gradient-orb orb-3" style="--color: #ec4899; --size: 600px;"></div>
+    <!-- Minimal Background Pattern (Subtle) -->
+    <div class="portal-background"></div>
 
     <!-- Main App Container -->
     <main class="app-container">
         
-        <!-- Animated Hero Section -->
-        <header class="hero-section fade-in-up">
-            <h1 class="gradient-text text-reveal" data-delay="100">
-                Code Redemption Center
-            </h1>
+        <!-- Top Navigation Bar (Corporate Header) -->
+        <header class="portal-header fade-in-down">
+            <div class="header-left">
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
+                <div class="header-title">
+                    <h1 style="--level:1; --weight:700">PhinCorp</h1>
+                    <p style="--level:2; --weight:400">Employee Benefits Portal</p>
+                </div>
+            </div>
             
-            <p class="subtitle text-fade-in" data-delay="300">
-                Enter your code to unlock the power in it!
-            </p>
+            <!-- Optional User Profile / Logout (Add if needed) -->
+            <div class="header-right" style="--i:3;">
+                <span class="user-badge">Portal v1.0</span>
+            </div>
+        </header>
 
-            <!-- Input Form with Glassmorphism -->
-            <form @submit.prevent="handleRedeem" class="redeem-form glass-card">
-                <div class="input-wrapper">
-                    <label for="code-input" class="visually-hidden">Code</label>
+        <!-- Main Content Area -->
+        <section class="portal-content fade-in-up">
+            
+            <!-- Welcome Banner (Optional - Clean & Minimal) -->
+            <div class="welcome-banner" style="--i:4;">
+                <p class="welcome-text">Welcome back, Employee</p>
+                <span class="welcome-subtext">Ready to redeem your benefits?</span>
+            </div>
+
+            <!-- Input Form Section (Glassmorphism) -->
+            <form @submit.prevent="handleRedeem" class="redeem-form glass-card" style="--i:5;">
+                
+                <!-- Code Input Field with Label -->
+                <div class="input-group">
+                    <label for="code-input" class="input-label">Enter Coupon/Code</label>
                     
-                    <!-- Animated Icon + Input -->
                     <div class="icon-container">
                         <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
                         <input 
                             type="text" 
                             id="code-input" 
                             x-model="userInput" 
-                            placeholder="Type code & press Enter..."
+                            placeholder="e.g., 20, 24, FRIENDS4EVER"
                             maxlength="15"
                             :class="{ 'error': error }"
                             required
                             autocomplete="off"
-                            data-delay="400"
                         >
                     </div>
 
                     <span class="error-message" x-show="error" x-text="error"></span>
                 </div>
                 
-                <!-- Animated Submit Button -->
+                <!-- Submit Button (Corporate Style) -->
                 <button type="submit" 
                         class="redeem-btn glass-btn pulse-animation" 
                         :class="{ 'loading': loading }">
                     <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
-                    <span x-text="loading ? 'Unlocking...' : 'Redeem Code'"></span>
+                    <span x-text="loading ? 'Processing...' : 'Redeem Coupon'"></span>
                     <!-- Loading Spinner (Hidden by default) -->
                     <div class="spinner" x-show="loading">
                         <span></span><span></span><span></span><span></span>
@@ -85,18 +95,18 @@
                     </div>
                 </div>
 
-                <!-- Success Modal (Popup) with Glassmorphism -->
+                <!-- Success Modal (Popup) with Corporate Style -->
                 <div class="modal-overlay glass-overlay" 
                      :class="{ 'show': showModal }">
                     <div class="modal-content glass-card modal-entrance" 
                          x-show="showModal"
                          @click.away="closeModal()">
-                        <!-- Animated Modal Header -->
+                        <!-- Modal Header Icon -->
                         <div class="modal-header pulse-animation">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
                         </div>
                         
-                        <h2 class="modal-title bounce-in">🎉 Code Redeemed!</h2>
+                        <h2 class="modal-title bounce-in">✅ Coupon Redeemed</h2>
                         <p class="modal-message slide-up-fade" x-text="currentReward.message"></p>
                         
                         <!-- Optional Image Display -->
@@ -105,93 +115,45 @@
                             <img :src="currentReward.image" alt="Reward" class="reward-image-anim">
                         </div>
 
-                        <!-- Animated Close Button -->
+                        <!-- Close Button -->
                         <button @click="closeModal()" 
                                 class="modal-close-btn glass-btn"
                                 type="button">
-                            Awesome! 😎✨
+                            Continue to Dashboard →
                         </button>
                     </div>
                 </div>
 
-                <!-- Confetti Effect (Triggered on Success) -->
-                <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
             </form>
 
-            <!-- Featured Codes Section with Hover Cards -->
-            <section class="featured-section fade-in-up">
-                <div class="section-header">
-                    <h3>🔥 Trending Codes 🔥</h3>
-                    <p class="section-subtitle">Popular among friends this week</p>
-                </div>
-
+            <!-- Quick Info Section (Clean & Minimal) -->
+            <section class="info-section fade-in-up" style="--i:6;">
+                <h3 class="section-title">Available Benefits</h3>
+                
+                <!-- Code Cards (Minimalist Design) -->
                 <div class="code-grid hover-tilt">
                     <template x-for="(code, index) in featuredCodes" :key="index">
                         <article class="code-card glass-card tilt-effect">
-                            <!-- Animated Number Badge -->
                             <span class="badge-badge glow-animation" 
                                   :style="{ animationDelay: `${index * 0.1}s` }">
-                                #{{ code.code }}
+                                {{ code.code }}
                             </span>
 
                             <h4 class="card-title slide-in-left" x-text="code.title"></h4>
                             <p class="card-description slide-up-fade" x-text="code.description"></p>
-
-                            <!-- Hover Action Button -->
-                            <button @click.prevent="$el.classList.add('active')" 
-                                    @mouseenter="$el.style.transform = 'translateY(-5px)'"
-                                    @mouseleave="$el.style.transform = ''"
-                                    class="card-action-btn">
-                                Try Now →
-                            </button>
                         </article>
                     </template>
                 </div>
 
-                <!-- Animated Stats/Info -->
-                <section class="stats-section fade-in-up">
-                    <h3 class="stats-title">Why Redeem?</h3>
-                    <ul class="stats-list">
-                        <li class="stat-item" data-delay="200">
-                            <span class="stat-icon" style="--i:1">🚀</span>
-                            <div>
-                                <strong>Instant Gratification</strong>
-                                <p>No wait times, just pure joy!</p>
-                            </div>
-                        </li>
-                        <li class="stat-item" data-delay="300">
-                            <span class="stat-icon" style="--i:2">🔐</span>
-                            <div>
-                                <strong>Secure Validation</strong>
-                                <p>Your codes stay safe, encrypted locally.</p>
-                            </div>
-                        </li>
-                        <li class="stat-item" data-delay="400">
-                            <span class="stat-icon" style="--i:3">🎁</span>
-                            <div>
-                                <strong>Funny Rewards</strong>
-                                <p>Because friendship deserves laughter.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- Footer/CTA -->
-                <footer class="hero-footer fade-in-up">
-                    <p class="footer-text">Still here? Check back later for more codes! 🎭</p>
-                    <div class="social-links" style="--i:4;">
-                        <!-- Optional Social Links (Add your URLs) -->
-                    </div>
-                </footer>
             </section>
 
-        </header>
+        </section>
+
     </main>
 
     <!-- Scripts -->
-    <script src="scripts/particles.js"></script>
-    <script src="scripts/confetti.js"></script>
     <script src="codes.json" type="application/json" defer></script>
     <script src="script.js"></script>
 </body>
 </html>
+
