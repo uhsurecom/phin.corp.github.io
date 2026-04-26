@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhinCorp | Coupon Redeem</title>
     
-    <!-- NeoBrutalist Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -16,18 +19,14 @@
 
     <!-- Marquee Header (Animated Text) -->
     <div class="marquee-container">
-        <p class="marquee-text">
-            🚀 PHINCORP COUPON REDEEM PORTAL // 
-            ENTER YOUR CODE TO UNLOCK BENEFITS // 
-            20% TAKESIES BACKSIES • 24 NO TOUCHY • FRIENDS4EVER // 
-        </p>
+        <p class="marquee-text">🚀 PHINCORP COUPON REDEEM PORTAL // ENTER YOUR CODE TO UNLOCK BENEFITS // 20% TAKESIES BACKSIES • 24 NO TOUCHY • FRIENDS4EVER //</p>
     </div>
 
     <!-- Main Container -->
     <main class="app-container">
         
         <!-- Header Section (Bold & Raw) -->
-        <header class="portal-header glass-border" style="--i:1;">
+        <header class="portal-header" data-index="1">
             <div class="logo-box">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M19.439 10.468a7.99 7.99 0 0 0-11.385-11.385"/><circle cx="12" cy="12" r="10"/></svg>
                 <div class="logo-text">
@@ -37,22 +36,22 @@
             </div>
             
             <!-- User Badge -->
-            <div class="user-badge glass-border" style="--i:3;">
+            <div class="user-badge" data-index="3">
                 <span class="badge-text">EMPLOYEE ACCESS</span>
             </div>
         </header>
 
         <!-- Main Content Area (NeoBrutalist Grid) -->
-        <section class="portal-content grid-layout" style="--i:4;">
+        <section class="portal-content grid-layout" data-index="4">
             
             <!-- Welcome Section -->
-            <div class="welcome-box glass-border" style="--i:5;">
+            <div class="welcome-box" data-index="5">
                 <h2 class="welcome-title">WELCOME, EMPLOYEE 👋</h2>
                 <p class="welcome-subtext">// Ready to redeem your benefits? Type the code below.</p>
             </div>
 
             <!-- Input Form (NeoBrutalist Style) -->
-            <form @submit.prevent="handleRedeem" class="redeem-form glass-border" style="--i:6;">
+            <form @submit.prevent="handleRedeem" class="redeem-form" data-index="6">
                 
                 <!-- Code Input Field -->
                 <div class="input-group">
@@ -68,9 +67,7 @@
                             maxlength="20"
                             :class="{ 'error': error }"
                             required
-                            autocomplete="off"
-                            style="--i:7;"
-                        >
+                            autocomplete="off">
                     </div>
 
                     <span class="error-message" x-show="error" x-text="error"></span>
@@ -78,10 +75,11 @@
                 
                 <!-- Submit Button -->
                 <button type="submit" 
-                        class="redeem-btn glass-border pulse-animation" 
+                        class="redeem-btn pulse-animation" 
                         :class="{ 'loading': loading }">
                     <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M15 6v12a3 3 0 1 0 6 0V6"/><path d="M8 9l7-3 7 3"/></svg>
                     <span x-text="loading ? 'PROCESSING...' : 'REDEEM NOW'"></span>
+                    
                     <!-- Loading Spinner -->
                     <div class="spinner" x-show="loading">
                         <span></span><span></span><span></span><span></span>
@@ -100,7 +98,7 @@
                 </div>
 
                 <!-- Success Modal (Popup) -->
-                <div class="modal-overlay glass-border" 
+                <div class="modal-overlay" 
                      :class="{ 'show': showModal }">
                     <div class="modal-content modal-entrance" 
                          x-show="showModal"
@@ -115,7 +113,7 @@
                         
                         <!-- Close Button -->
                         <button @click="closeModal()" 
-                                class="modal-close-btn glass-border"
+                                class="modal-close-btn"
                                 type="button">
                             NEXT: GO TO DASHBOARD →
                         </button>
@@ -125,13 +123,13 @@
             </form>
 
             <!-- Quick Info Section (Grid Layout) -->
-            <section class="info-section grid-layout" style="--i:8;">
+            <section class="info-section grid-layout" data-index="8">
                 <h3 class="section-title">AVAILABLE BENEFITS</h3>
                 
                 <!-- Code Cards (NeoBrutalist Design) -->
                 <div class="code-grid hover-tilt">
                     <template x-for="(code, index) in featuredCodes" :key="index">
-                        <article class="code-card glass-border tilt-effect">
+                        <article class="code-card tilt-effect">
                             <span class="badge-badge glow-animation" 
                                   :style="{ animationDelay: `${index * 0.1}s` }">
                                 CODE #{{ code.code }}
